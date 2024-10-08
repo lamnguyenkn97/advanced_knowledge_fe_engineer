@@ -2,85 +2,99 @@
 sidebar_position: 1
 ---
 
-# Translate your site
+# Closures
 
-Let's translate `docs/intro.md` to French.
-
-## Configure i18n
-
-Modify `docusaurus.config.js` to add support for the `fr` locale:
+Closures are a fundamental concept in JavaScript where a function "remembers" the scope in which it was created, even after that scope has finished execution. In simple terms, a closure allows a function to access variables from its outer scope even after the outer function has returned.
 
 ```js title="docusaurus.config.js"
-export default {
-    i18n: {
-        defaultLocale: 'en',
-        locales: ['en', 'fr'],
-    },
-};
+function outerFunction(outerVariable) {
+    return function innerFunction(innerVariable) {
+        console.log(`Outer Variable: ${outerVariable}`);
+        console.log(`Inner Variable: ${innerVariable}`);
+    };
+}
+
+const newFunction = outerFunction('outer');
+newFunction('inner');
 ```
 
-## Translate a doc
+### Application in React
+#### 1.Handling Event Listeners in Functional Component
 
-Copy the `docs/intro.md` file to the `i18n/fr` folder:
+React components often use closures to capture variables or states that are needed in event handlers.
+Here's an example of how closures allow access to the component’s state even in an asynchronous event handler:
 
-```bash
-mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
+```js
+function Counter() {
+  const [count, setCount] = React.useState(0);
 
-cp docs/intro.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
+  function handleClick() {
+    setTimeout(() => {
+      // This callback "remembers" the `count` value due to closure
+      console.log('Current count:', count);
+    }, 1000);
+  }
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={handleClick}>Log Count</button>
+    </div>
+  );
+}
 ```
 
-Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
+## 2. useCallback and Closure
 
-## Start your localized site
+Memoizing functions: When you use useCallback, the callback function closes over state or props. The closure allows the callback to access the variables it needs, but the function will only be recreated if the dependencies change.
+Prevents unnecessary re-renders: Memoized functions using useCallback help avoid passing new function references to child components unless necessary, which improves performance.
 
-Start your site on the French locale:
 
-```bash
-npm run start -- --locale fr
+```js
+function MyComponent() {
+    const [count, setCount] = React.useState(0);
+
+    const handleClick = React.useCallback(() => {
+        console.log(count); // Closure over `count`
+    }, [count]); // Dependency on `count`
+
+    return <button onClick={handleClick}>Click me</button>;
+}
 ```
 
-Your localized site is accessible at [http://localhost:3000/fr/](http://localhost:3000/fr/) and the `Getting Started` page is translated.
+## 3. useEffect and Closure
+Whenever you define an effect inside a React component, the function you pass to useEffect closes over the component’s state and props at the time the effect was created. This means that the effect function can access the variables in the outer scope (the component’s state, props, and any other variables).
 
-:::caution
+However, if the state or props change between renders, the effect function could be working with outdated values from the previous render due to closures.
 
-In development, you can only use one locale at a time.
+Here’s a simple example to illustrate:
 
-:::
+```js
+function MyComponent() {
+    const [count, setCount] = React.useState(0);
 
-## Add a Locale Dropdown
+    React.useEffect(() => {
+        console.log(count); // Closure over `count`
+    }, []); // No dependencies
 
-To navigate seamlessly across languages, add a locale dropdown.
-
-Modify the `docusaurus.config.js` file:
-
-```js title="docusaurus.config.js"
-export default {
-    themeConfig: {
-        navbar: {
-            items: [
-                // highlight-start
-                {
-                    type: 'localeDropdown',
-                },
-                // highlight-end
-            ],
-        },
-    },
-};
+    return <button onClick={() => setCount(count + 1)}>Increment</button>;
+}
 ```
 
-The locale dropdown now appears in your navbar:
+In this example, the effect function closes over the count variable. The effect will log the current count value when the component mounts, but it will always log the initial count value of 0 because the effect has no dependencies.
 
-## Build your localized site
+To fix this issue, you can add count as a dependency to the useEffect hook:
 
-Build your site for a specific locale:
+```js
+function MyComponent() {
+    const [count, setCount] = React.useState(0);
 
-```bash
-npm run build -- --locale fr
+    React.useEffect(() => {
+        console.log(count); // Closure over `count`
+    }, [count]); // Dependency on `count`
+
+    return <button onClick={() => setCount(count + 1)}>Increment</button>;
+}
 ```
 
-Or build your site to include all the locales at once:
 
-```bash
-npm run build
-```
