@@ -161,6 +161,9 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    liveCodeBlock: {
+      playgroundPosition: 'bottom',
+    },
   } satisfies Preset.ThemeConfig,
 };
 
