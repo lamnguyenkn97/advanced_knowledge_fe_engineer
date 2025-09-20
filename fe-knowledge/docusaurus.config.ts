@@ -39,6 +39,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          routeBasePath: 'docs',
         },
         blog: {
           showReadingTime: true,
@@ -74,9 +75,27 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'introSidebar',
           position: 'left',
-          label: 'Knowledge',
+          label: 'Intro',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'dsaSidebar',
+          position: 'left',
+          label: 'DSA',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'javascriptSidebar',
+          position: 'left',
+          label: 'JavaScript',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'reactSidebar',
+          position: 'left',
+          label: 'React',
         },
         {
           href: 'https://github.com/facebook/docusaurus',
@@ -89,11 +108,23 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Knowledge Areas',
           items: [
             {
-              label: 'Knowledge Hub',
+              label: 'Introduction',
               to: '/docs/intro',
+            },
+            {
+              label: 'DSA Knowledge',
+              to: '/docs/dsa-knowledge',
+            },
+            {
+              label: 'JavaScript Knowledge',
+              to: '/docs/javascript-knowledge',
+            },
+            {
+              label: 'React Knowledge',
+              to: '/docs/react-knowledge',
             },
           ],
         },
