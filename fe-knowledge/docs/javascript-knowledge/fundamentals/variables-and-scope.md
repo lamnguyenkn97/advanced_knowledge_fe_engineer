@@ -109,3 +109,4 @@ console.log(addFive(3)); // 8
 3. **Declare variables at the top** of their scope
 4. **Use meaningful names** for variables
 5. **Minimize global variables** - use modules instead
+

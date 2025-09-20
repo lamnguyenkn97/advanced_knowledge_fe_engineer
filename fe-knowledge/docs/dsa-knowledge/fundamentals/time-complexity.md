@@ -83,3 +83,4 @@ function createArray(n) {
 3. **Profile your code** to identify bottlenecks
 4. **Use built-in methods** when they're optimized
 5. **Think about scalability** from the start
+

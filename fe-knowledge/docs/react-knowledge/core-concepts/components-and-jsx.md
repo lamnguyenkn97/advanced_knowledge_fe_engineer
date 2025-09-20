@@ -197,3 +197,4 @@ function NumberList({ numbers }) {
 5. **Use TypeScript** for better type safety
 6. **Always use keys** when rendering lists
 7. **Avoid inline functions** in JSX when possible
+

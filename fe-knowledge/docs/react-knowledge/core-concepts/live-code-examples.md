@@ -387,3 +387,4 @@ function MyComponent() {
 4. Test your examples before publishing
 5. Use React hooks for state management
 6. Show both simple and advanced examples
+

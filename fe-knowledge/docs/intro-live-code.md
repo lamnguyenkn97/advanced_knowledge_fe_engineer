@@ -94,3 +94,4 @@ function MyComponent() {
 3. Add comments to explain complex concepts
 4. Test your examples before publishing
 5. Use React hooks for state management in examples
+

@@ -48,3 +48,4 @@ This section covers JavaScript in the context of modern frontend development, in
 - Testing frameworks and tools
 
 Let's dive deep into JavaScript and become a true JavaScript expert! 🚀
+
