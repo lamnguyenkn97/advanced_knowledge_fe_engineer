@@ -1,47 +1,52 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
+import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
+  link: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'DSA Knowledge',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Master Data Structures and Algorithms specifically tailored for frontend engineering. 
+        Learn time complexity, data structures, algorithms, and problem-solving patterns.
       </>
     ),
+    link: '/docs/dsa-knowledge',
   },
   {
-    title: 'Focus on What Matters',
+    title: 'JavaScript Mastery',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        From fundamentals to advanced concepts, dive deep into JavaScript - the backbone of 
+        modern web development. Cover ES6+, async programming, and DOM manipulation.
       </>
     ),
+    link: '/docs/javascript-knowledge',
   },
   {
-    title: 'Powered by React',
+    title: 'React Expertise',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Master React from core concepts to advanced patterns. Learn components, hooks, 
+        state management, performance optimization, and the React ecosystem.
       </>
     ),
+    link: '/docs/react-knowledge',
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, Svg, description, link}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -50,6 +55,13 @@ function Feature({title, Svg, description}: FeatureItem) {
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
+        <div className={styles.featureButton}>
+          <Link
+            className="button button--secondary button--sm"
+            to={link}>
+            Explore {title} →
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Frontend Knowledge Hub',
+  tagline: 'Master DSA, JavaScript, and React for Frontend Engineering',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -39,6 +39,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          routeBasePath: 'docs',
         },
         blog: {
           showReadingTime: true,
@@ -62,23 +63,42 @@ const config: Config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-live-codeblock'],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Frontend Knowledge Hub',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Frontend Knowledge Hub Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'introSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Intro',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'docSidebar',
+          sidebarId: 'dsaSidebar',
+          position: 'left',
+          label: 'DSA',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'javascriptSidebar',
+          position: 'left',
+          label: 'JavaScript',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'reactSidebar',
+          position: 'left',
+          label: 'React',
+        },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
@@ -90,11 +110,23 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Knowledge Areas',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Introduction',
               to: '/docs/intro',
+            },
+            {
+              label: 'DSA Knowledge',
+              to: '/docs/dsa-knowledge',
+            },
+            {
+              label: 'JavaScript Knowledge',
+              to: '/docs/javascript-knowledge',
+            },
+            {
+              label: 'React Knowledge',
+              to: '/docs/react-knowledge',
             },
           ],
         },
@@ -119,21 +151,20 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
               label: 'GitHub',
               href: 'https://github.com/facebook/docusaurus',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Frontend Knowledge Hub. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    liveCodeBlock: {
+      playgroundPosition: 'bottom',
     },
   } satisfies Preset.ThemeConfig,
 };

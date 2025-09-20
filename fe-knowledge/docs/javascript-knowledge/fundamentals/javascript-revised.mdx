@@ -1,0 +1,131 @@
+---
+sidebar_position: 1
+---
+
+# Revised Type in JavaScript
+
+
+### Primitives v.s Reference Types
+
+1. Primitives Types
+- Immutable
+- Value Copy
+- Stored in Stack
+- Types: string, number, undefined, null, boolean
+
+```jsx live
+function PrimitiveAssignment() {
+  let a = 10;
+  let b = a;
+  b = 20;
+
+  return (
+    <pre>
+      {"b: " + b + "\n"}
+      {"a: " + a}
+    </pre>
+  );
+}
+```
+
+2. Reference Types
+- Mutable
+- Reference Copy
+- Stored in Heap
+- Types: Object, Array, Function
+
+```jsx live
+function ReferenceAssignment() {
+    let obj1 = { name: "Alice" };
+    let obj2 = obj1;
+    obj2.name = "Bob";
+    return (
+      <pre>
+        {"obj1.name: " + obj1.name + "\n"}
+        {"obj2.name: " + obj2.name}
+      </pre>
+    )
+}
+```
+#### Deep copy v.s Shallow copy
+
+1. Shallow Copy
+- Only copy the first level properties
+- Nested objects still reference the same memory location
+- Like copy the cover but not the whole book
+- Methods: `{...objectA}`; `Object.assign(a, b)`
+
+2. Deep Copy
+- Recursively copy all levels of properties
+- Nested objects are copied to new memory locations
+- Safer but more memory intensive
+- Like copy the book page by page
+- Methods: `JSON.parse(JSON.stringify(obj))`; `structuredClone(obj)`
+
+```jsx live
+function ShallowCopyExample() {
+  const obj1 = { a: 1, b: { c: 2 } };
+  const obj2 = { ...obj1 };
+  obj2.a = 8;
+  obj2.b.c = 5;
+
+  return (
+    <pre>
+      {"Still preserve first level: obj1.a: " + obj1.a + "\n"}
+      {"Cannot preserve the deeper level: obj1.b.c: " + obj1.b.c + "\n"}
+    </pre>
+  );
+}
+```
+
+```jsx live
+function DeepCopy  () {
+  const obj1 = { a: 1, b: { c: 2 } };
+  const obj2 = JSON.parse(JSON.stringify(obj1));
+  obj2.a = 8;
+  obj2.b.c = 5;
+  return (
+    <pre>
+      {"Still preserve first level: obj1.a: " + obj1.a + "\n"}
+      {"Preserve all the levels nested " + obj1.b.c + "\n"}
+    </pre>
+  );
+}
+```
+#### null v.s undefined
+1. Null : Explicit no value
+
+2. Undefined : A variable declared which hasn't been assigned a value 
+
+```jsx live
+function Example(){
+  let a;
+  let b = null;
+  typeof null;
+  typeof undefined
+  return <pre>
+    {'Type of a: ' + typeof(a) + '\n'}
+    {'Type of b: ' + typeof(b)}
+  </pre>
+}
+```
+
+
+
+### == v.s ===
+
+
+### Truthy v.s Falsy
+
+
+### Type Coercion Rules
+
+
+"5" + 1;   
+"5" - 1;    
+false == 0; 
+[] == "";  
+[] == 0;   
+[1] == 1;  
+
+### typeof v.s instanceof v.s Object.prototype.toString.call()

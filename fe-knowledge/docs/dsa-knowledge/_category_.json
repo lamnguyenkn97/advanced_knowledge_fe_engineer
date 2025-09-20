@@ -1,0 +1,9 @@
+{
+  "label": "DSA Knowledge",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Master Data Structures and Algorithms for Frontend Engineering"
+  }
+}
+
